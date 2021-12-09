@@ -56,8 +56,45 @@ function printTeam(array, container) {
     container.innerHTML += teamCard; 
   }
 }
+
+
 // creo variabile contenitore
 const teamContainer = document.querySelector('.team-container');
 // utilizzo funzione per stampare array in html 
 printTeam(team, teamContainer);
 
+
+
+
+// BONUS 
+/* Utilizziamo gli input presenti nella pagina per permettere all’utente di aggiungere nuovi membri del team: cliccando sul pulsante “add” viene creato un nuovo oggetto, il quale viene inserito nell’array iniziale, e viene stampata una nuova card con tutte le informazioni inserite dall’utente. */
+
+const inputName = document.getElementById('name');
+const inputRole = document.getElementById('role');
+const inputImage = document.getElementById('image');
+const button = document.getElementById('addMemberButton');
+
+button.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  // prendo dati inseriti nel form dall'utente 
+  const nameTeam = inputName.value;
+  const roleTeam = inputRole.value;
+  const imageTeam = inputImage.value;
+
+  if (nameTeam.length > 0 && roleTeam.length > 0 && imageTeam.length > 0) {
+    // se utente inserisce valore non  ullo 
+    const obj = {
+      name: nameTeam,
+      role: roleTeam,
+      image: imageTeam,
+    }
+    // inserisco obj nell'array team 
+    team.push(obj);
+    // allora stampiamo le nuove card con i dati inseriti dall'utente 
+    printTeam(team, teamContainer); 
+  } else {
+    alert('Inserire dati corretti');
+  }
+
+});
